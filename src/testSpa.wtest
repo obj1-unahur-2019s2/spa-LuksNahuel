@@ -1,0 +1,68 @@
+import spa.spa
+import personas.*
+
+test "olivia y su concentración" {
+	assert.equals(6, olivia.gradoDeConcentracion())
+	olivia.recibirMasajes()
+	olivia.recibirMasajes()
+	olivia.discutir()
+	olivia.darseUnBanioDeVapor()
+	assert.equals(11, olivia.gradoDeConcentracion())
+}
+
+test "bruno y sus estados" {
+	//por defecto nació feliz
+	assert.that(bruno.esFeliz())
+	bruno.darseUnBanioDeVapor()
+	assert.equals(54500, bruno.peso())
+	assert.that(bruno.tieneSed())
+	
+	bruno.mediodiaEnCasa()
+	assert.equals(54750, bruno.peso())
+	assert.notThat(bruno.tieneSed())
+	assert.notThat(bruno.esFeliz())
+	
+	bruno.recibirMasajes()
+	assert.that(bruno.estaPerfecto())
+}
+
+test "ramiro, la piel y la contractura" {
+	//por defecto la contractura es 0
+	assert.equals(0, ramiro.nivelDeContractura())
+	
+	ramiro.comerseUnBigMac()
+	assert.that(ramiro.tienePielGrasosa())
+	ramiro.darseUnBanioDeVapor()
+	assert.notThat(ramiro.tienePielGrasosa())
+	
+	ramiro.diaDeTrabajo()
+	ramiro.bajarALaFosa()
+	ramiro.jugarAlPaddle()
+	ramiro.recibirMasajes()
+	assert.equals(4, ramiro.nivelDeContractura())
+	assert.that(ramiro.tienePielGrasosa())
+	
+	ramiro.recibirMasajes()
+	ramiro.recibirMasajes()
+	assert.equals(0, ramiro.nivelDeContractura())
+}
+
+test "spa atiende personas diferentes" {
+	spa.atender(olivia)
+	assert.equals(9, olivia.gradoDeConcentracion())
+	
+	spa.atender(bruno)
+	assert.equals(54500, bruno.peso())
+	
+	spa.atender(olivia)
+	//acá se prueba que olivia no recibe una doble ración de masajes
+	assert.notEquals(15, olivia.gradoDeConcentracion())
+}
+
+test "spa atiende a olivia dos veces seguidas" {
+	spa.atender(olivia)
+	assert.equals(9, olivia.gradoDeConcentracion())
+	
+	spa.atender(olivia)
+	assert.equals(15, olivia.gradoDeConcentracion())
+}
